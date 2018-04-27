@@ -40,11 +40,8 @@ url = 'http://52.24.78.232/' + 'myindex_' + abr_algo + '.html'
 #signal.alarm(run_time + 30)
 	
 try:
-        #Following 4 lines added by hudson to address frequent "ADDR ALREADY IN USE" errors
-        command1 = 'lsof -ti:8334 | xargs kill -9'
-        proc1 = subprocess.Popen(command1, shell=True)
-        sleep(2)
-        proc1.kill()
+
+
 
 	# copy over the chrome user dir
 
@@ -56,13 +53,20 @@ try:
 	# start abr algorithm server
 	if abr_algo == 'RL':
 		command = 'exec /usr/bin/python ../rl_server/rl_server_no_training.py ' + exp_id
+                command1 = 'lsof -ti:8333 | xargs kill -9'
 	elif abr_algo == 'fastMPC':
 		command = 'exec /usr/bin/python ../rl_server/mpc_server.py ' + exp_id
 	elif abr_algo == 'robustMPC':
 		command = 'exec /usr/bin/python ../rl_server/robust_mpc_server.py ' + exp_id
 	else:
 		command = 'exec /usr/bin/python ../rl_server/simple_server.py ' + abr_algo + ' ' + exp_id
-	
+                command1 = 'lsof -ti:8334 | xargs kill -9'
+
+        #Following 4 lines added by hudson to address frequent "ADDR ALREADY IN USE" errors
+        proc1 = subprocess.Popen(command1, shell=True)
+        sleep(1)
+        proc1.kill()
+
 	proc = subprocess.Popen(command, shell=True)
 	sleep(2)
 	#Following 10 lines or so start up a selenium virtual display and play the video in it
