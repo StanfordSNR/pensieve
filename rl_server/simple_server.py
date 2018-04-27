@@ -95,7 +95,7 @@ def make_request_handler(input_dict):
     return Request_Handler
 
 
-def run(server_class=HTTPServer, port=8333, log_file_path=LOG_FILE):
+def run(server_class=HTTPServer, port=8334, log_file_path=LOG_FILE):
 
     if not os.path.exists(SUMMARY_DIR):
         os.makedirs(SUMMARY_DIR)
@@ -110,7 +110,7 @@ def run(server_class=HTTPServer, port=8333, log_file_path=LOG_FILE):
 
         handler_class = make_request_handler(input_dict=input_dict)
 
-        server_address = ('localhost', port)
+        server_address = ('0.0.0.0', port)
         httpd = server_class(server_address, handler_class)
         print 'Listening on port ' + str(port)
         httpd.serve_forever()

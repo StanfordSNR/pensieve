@@ -70,7 +70,7 @@ function TemplateSegmentsGetter(config, isDynamic) {
         for (periodSegIdx = startIdx; periodSegIdx <= endIdx; periodSegIdx++) {
 
             seg = getIndexBasedSegment(timelineConverter, isDynamic, representation, periodSegIdx);
-            seg.replacementTime = (start + periodSegIdx - 1) * representation.segmentDuration;
+            seg.replacementTime = (start + periodSegIdx - 1) * representation.origSegmentDuration;
             url = template.media;
             url = replaceTokenForTemplate(url, 'Number', seg.replacementNumber);
             url = replaceTokenForTemplate(url, 'Time', seg.replacementTime);

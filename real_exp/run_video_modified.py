@@ -41,7 +41,7 @@ url = 'http://52.24.78.232/' + 'myindex_' + abr_algo + '.html'
 	
 try:
         #Following 4 lines added by hudson to address frequent "ADDR ALREADY IN USE" errors
-        command1 = 'lsof -ti:8333 | xargs kill -9'
+        command1 = 'lsof -ti:8334 | xargs kill -9'
         proc1 = subprocess.Popen(command1, shell=True)
         sleep(2)
         proc1.kill()

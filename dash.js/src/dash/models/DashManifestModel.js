@@ -448,6 +448,7 @@ function DashManifestModel() {
                 // exceeds @maxSegmentDuration
                 //representation.segmentDuration = Math.min(segmentInfo.duration / representation.timescale, adaptation.period.mpd.maxSegmentDuration);
                 representation.segmentDuration = segmentInfo.duration / representation.timescale;
+                representation.origSegmentDuration = segmentInfo.duration;
             }
             if (segmentInfo.hasOwnProperty('startNumber')) {
                 representation.startNumber = segmentInfo.startNumber;

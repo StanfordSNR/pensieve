@@ -53,6 +53,7 @@ const QUALITY_DEFAULT = 0;
 //const metricsModel = this.context.metricsModel;
 
 function AbrController() {
+    var AbrServerPort = 8333;
     let context = this.context;
     let eventBus = EventBus(context).getInstance();
     let abrAlgo = -1;
@@ -509,7 +510,8 @@ function AbrController() {
         switch(abrAlgo) {
             case 2:
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", "http://localhost:8333", false);
+                AbrServerPort = document.getElementById("Abr-server-port").value;
+                xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
                         console.log("GOT RESPONSE:" + xhr.responseText + "---");
@@ -523,7 +525,8 @@ function AbrController() {
                 return getBitrateBB(buffer);
             case 3:
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", "http://localhost:8333", false);
+                AbrServerPort = document.getElementById("Abr-server-port").value;
+                xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
                         console.log("GOT RESPONSE:" + xhr.responseText + "---");
@@ -538,7 +541,8 @@ function AbrController() {
             case 4:
                 var quality = 2;
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", "http://localhost:8333", false);
+                AbrServerPort = document.getElementById("Abr-server-port").value;
+                xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
                         console.log("GOT RESPONSE:" + xhr.responseText + "---");
@@ -556,7 +560,8 @@ function AbrController() {
                 return quality;
             case 5:
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", "http://localhost:8333", false);
+                AbrServerPort = document.getElementById("Abr-server-port").value;
+                xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
                         console.log("GOT RESPONSE:" + xhr.responseText + "---");
@@ -571,7 +576,8 @@ function AbrController() {
                 return getBitrateFestive(lastQuality, bufferLevelAdjusted, bandwidthEst, lastRequested, bitrateArray);
             case 6:
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", "http://localhost:8333", false);
+                AbrServerPort = document.getElementById("Abr-server-port").value;
+                xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
                         console.log("GOT RESPONSE:" + xhr.responseText + "---");
@@ -586,7 +592,8 @@ function AbrController() {
             default:
                 // defaults to lowest quality always
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", "http://localhost:8333", false);
+                AbrServerPort = document.getElementById("Abr-server-port").value;
+                xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
                         console.log("GOT RESPONSE:" + xhr.responseText + "---");
@@ -643,7 +650,8 @@ function AbrController() {
                     var bandwidthEst = predict_throughput(lastRequested, lastQuality, lastHTTPRequest);
                     // defaults to lowest quality always
                     var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "http://localhost:8333", false);
+                    AbrServerPort = document.getElementById("Abr-server-port").value;
+                    xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
                     xhr.onreadystatechange = function() {
                         if ( xhr.readyState == 4 && xhr.status == 200 ) {
                             console.log("GOT RESPONSE:" + xhr.responseText + "---");
