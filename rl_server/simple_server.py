@@ -42,6 +42,9 @@ def make_request_handler(input_dict):
             send_data = ""
 
             if ( 'lastquality' in post_data ):
+                print "lastquality = " + str(post_data['lastquality'])
+                if post_data['lastquality'] >= len(VIDEO_BIT_RATE):
+                    post_data['lastquality'] = len(VIDEO_BIT_RATE) -1
                 rebuffer_time = float(post_data['RebufferTime'] -self.input_dict['last_total_rebuf'])
                 reward = \
                    VIDEO_BIT_RATE[post_data['lastquality']] / M_IN_K \
