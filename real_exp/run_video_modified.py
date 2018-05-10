@@ -26,9 +26,11 @@ def main():
         kill_port_cmd = 'lsof -ti:8333 | xargs kill -9'
     elif abr_algo == 'fastMPC':
         cmd = ['python', path.join(rl_server_dir, 'mpc_server.py'), expt_id]
+        kill_port_cmd = 'lsof -ti:8335 | xargs kill -9'
     elif abr_algo == 'robustMPC':
         cmd = ['python', path.join(rl_server_dir, 'robust_mpc_server.py'),
                expt_id]
+        kill_port_cmd = 'lsof -ti:8336 | xargs kill -9'
     else:
         cmd = ['python', path.join(rl_server_dir, 'simple_server.py'), expt_id]
         kill_port_cmd = 'lsof -ti:8334 | xargs kill -9'
