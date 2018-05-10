@@ -5,6 +5,7 @@ import base64
 import urllib
 import sys
 import os
+from os import path
 import json
 os.environ['CUDA_VISIBLE_DEVICES']=''
 
@@ -37,7 +38,8 @@ SUMMARY_DIR = './results'
 LOG_FILE = './results/log'
 # in format of time_stamp bit_rate buffer_size rebuffer_time video_chunk_size download_time reward
 # NN_MODEL = None
-NN_MODEL = '../rl_server/results/pretrain_linear_reward.ckpt'
+CURR_DIR = path.abspath(path.join(path.dirname(__file__)))
+NN_MODEL = path.join(CURR_DIR, 'results/pretrain_linear_reward.ckpt')
 
 # video chunk sizes
 size_video1 = [2354772, 2123065, 2177073, 2160877, 2233056, 1941625, 2157535, 2290172, 2055469, 2169201, 2173522, 2102452, 2209463, 2275376, 2005399, 2152483, 2289689, 2059512, 2220726, 2156729, 2039773, 2176469, 2221506, 2044075, 2186790, 2105231, 2395588, 1972048, 2134614, 2164140, 2113193, 2147852, 2191074, 2286761, 2307787, 2143948, 1919781, 2147467, 2133870, 2146120, 2108491, 2184571, 2121928, 2219102, 2124950, 2246506, 1961140, 2155012, 1433658]
