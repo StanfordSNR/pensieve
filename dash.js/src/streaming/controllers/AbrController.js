@@ -511,7 +511,9 @@ function AbrController() {
             case 2:
                 var xhr = new XMLHttpRequest();
                 AbrServerPort = document.getElementById("Abr-server-port").value;
-                xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
+                var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
+                console.log("DEBUG: AddressToOpen is: " AddressToOpen)
+                xhr.open("POST", AddressToOpen, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
                         console.log("GOT RESPONSE:" + xhr.responseText + "---");
@@ -526,7 +528,9 @@ function AbrController() {
             case 3:
                 var xhr = new XMLHttpRequest();
                 AbrServerPort = document.getElementById("Abr-server-port").value;
-                xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
+                var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
+                console.log("DEBUG: AddressToOpen is: " AddressToOpen)
+                xhr.open("POST", AddressToOpen, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
                         console.log("GOT RESPONSE:" + xhr.responseText + "---");
@@ -542,7 +546,9 @@ function AbrController() {
                 var quality = 2;
                 var xhr = new XMLHttpRequest();
                 AbrServerPort = document.getElementById("Abr-server-port").value;
-                xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
+                var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
+                console.log("DEBUG: AddressToOpen is: " AddressToOpen)
+                xhr.open("POST", AddressToOpen, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
                         console.log("GOT RESPONSE:" + xhr.responseText + "---");
@@ -561,7 +567,9 @@ function AbrController() {
             case 5:
                 var xhr = new XMLHttpRequest();
                 AbrServerPort = document.getElementById("Abr-server-port").value;
-                xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
+                var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
+                console.log("DEBUG: AddressToOpen is: " AddressToOpen)
+                xhr.open("POST", AddressToOpen, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
                         console.log("GOT RESPONSE:" + xhr.responseText + "---");
@@ -577,7 +585,9 @@ function AbrController() {
             case 6:
                 var xhr = new XMLHttpRequest();
                 AbrServerPort = document.getElementById("Abr-server-port").value;
-                xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
+                var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
+                console.log("DEBUG: AddressToOpen is: " AddressToOpen)
+                xhr.open("POST", AddressToOpen, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
                         console.log("GOT RESPONSE:" + xhr.responseText + "---");
@@ -593,7 +603,9 @@ function AbrController() {
                 // defaults to lowest quality always
                 var xhr = new XMLHttpRequest();
                 AbrServerPort = document.getElementById("Abr-server-port").value;
-                xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
+                var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
+                console.log("DEBUG: AddressToOpen is: " AddressToOpen)
+                xhr.open("POST", AddressToOpen, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
                         console.log("GOT RESPONSE:" + xhr.responseText + "---");
@@ -651,7 +663,9 @@ function AbrController() {
                     // defaults to lowest quality always
                     var xhr = new XMLHttpRequest();
                     AbrServerPort = document.getElementById("Abr-server-port").value;
-                    xhr.open("POST", "http://52.24.78.232:" + AbrServerPort, false);
+                    var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
+                    console.log("DEBUG: AddressToOpen is: " AddressToOpen)
+                    xhr.open("POST", AddressToOpen, false);
                     xhr.onreadystatechange = function() {
                         if ( xhr.readyState == 4 && xhr.status == 200 ) {
                             console.log("GOT RESPONSE:" + xhr.responseText + "---");
