@@ -15,7 +15,6 @@ REPEAT_TIME = 1
 def main():
 
 	np.random.seed(RANDOM_SEED)
-        print "hi hudson"
 	with open('./chrome_retry_log', 'wb') as log:
 		log.write('chrome retry log\n')
 		log.flush()
