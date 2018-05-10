@@ -13,9 +13,10 @@ import numpy as np
 import time
 
 
-VIDEO_BIT_RATE = [300,750,1200,1850,2850,4300]  # Kbps
-BITRATE_REWARD = [1, 2, 3, 12, 15, 20]
-BITRATE_REWARD_MAP = {0: 0, 300: 1, 750: 2, 1200: 3, 1850: 12, 2850: 15, 4300: 20}
+#VIDEO_BIT_RATE = [300,750,1200,1850,2850,4300]  # Kbps
+VIDEO_BIT_RATE = [593,1108,1714,3200]  # Kbps
+BITRATE_REWARD = [1, 2, 3, 12]
+BITRATE_REWARD_MAP = {0: 0, 593: 1, 1108: 2, 1714: 3, 3200: 12}
 M_IN_K = 1000.0
 DEFAULT_QUALITY = 0  # default video quality without agent
 REBUF_PENALTY = 4.3  # 1 sec rebuffering -> this number of Mbps
@@ -35,6 +36,7 @@ def make_request_handler(input_dict):
             BaseHTTPRequestHandler.__init__(self, *args, **kwargs)
 
         def do_POST(self):
+            print "Hud: do post"
             content_length = int(self.headers['Content-Length'])
             post_data = json.loads(self.rfile.read(content_length))
             
@@ -84,6 +86,7 @@ def make_request_handler(input_dict):
             self.wfile.write(send_data)
 
         def do_GET(self):
+            print "Hud: Got Req"
             print >> sys.stderr, 'GOT REQ'
             self.send_response(200)
             #self.send_header('Cache-Control', 'Cache-Control: no-cache, no-store, must-revalidate max-age=0')

@@ -510,7 +510,7 @@ function AbrController() {
         switch(abrAlgo) {
             case 2:
                 var xhr = new XMLHttpRequest();
-                AbrServerPort = document.getElementById("Abr-server-port").value;
+                AbrServerPort = "8334";
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
                 console.log("DEBUG: AddressToOpen is: " AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
@@ -527,7 +527,7 @@ function AbrController() {
                 return getBitrateBB(buffer);
             case 3:
                 var xhr = new XMLHttpRequest();
-                AbrServerPort = document.getElementById("Abr-server-port").value;
+                AbrServerPort = "8334";
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
                 console.log("DEBUG: AddressToOpen is: " AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
@@ -545,7 +545,7 @@ function AbrController() {
             case 4:
                 var quality = 2;
                 var xhr = new XMLHttpRequest();
-                AbrServerPort = document.getElementById("Abr-server-port").value;
+                AbrServerPort = "8333";
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
                 console.log("DEBUG: AddressToOpen is: " AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
@@ -566,7 +566,7 @@ function AbrController() {
                 return quality;
             case 5:
                 var xhr = new XMLHttpRequest();
-                AbrServerPort = document.getElementById("Abr-server-port").value;
+                AbrServerPort = "8334";
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
                 console.log("DEBUG: AddressToOpen is: " AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
@@ -584,7 +584,7 @@ function AbrController() {
                 return getBitrateFestive(lastQuality, bufferLevelAdjusted, bandwidthEst, lastRequested, bitrateArray);
             case 6:
                 var xhr = new XMLHttpRequest();
-                AbrServerPort = document.getElementById("Abr-server-port").value;
+                AbrServerPort = "8334";
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
                 console.log("DEBUG: AddressToOpen is: " AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
@@ -602,7 +602,7 @@ function AbrController() {
             default:
                 // defaults to lowest quality always
                 var xhr = new XMLHttpRequest();
-                AbrServerPort = document.getElementById("Abr-server-port").value;
+                AbrServerPort = "8334";
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
                 console.log("DEBUG: AddressToOpen is: " AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
@@ -662,7 +662,7 @@ function AbrController() {
                     var bandwidthEst = predict_throughput(lastRequested, lastQuality, lastHTTPRequest);
                     // defaults to lowest quality always
                     var xhr = new XMLHttpRequest();
-                    AbrServerPort = document.getElementById("Abr-server-port").value;
+                    AbrServerPort = "8334";
                     var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
                     console.log("DEBUG: AddressToOpen is: " AddressToOpen)
                     xhr.open("POST", AddressToOpen, false);
