@@ -512,7 +512,7 @@ function AbrController() {
                 var xhr = new XMLHttpRequest();
                 AbrServerPort = "8334";
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
-                console.log("DEBUG: AddressToOpen is: " + AddressToOpen
+                console.log("DEBUG: AddressToOpen is: " + AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
@@ -529,7 +529,7 @@ function AbrController() {
                 var xhr = new XMLHttpRequest();
                 AbrServerPort = "8334";
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
-                console.log("DEBUG: AddressToOpen is: " + AddressToOpen
+                console.log("DEBUG: AddressToOpen is: " + AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
@@ -547,7 +547,7 @@ function AbrController() {
                 var xhr = new XMLHttpRequest();
                 AbrServerPort = "8333";
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
-                console.log("DEBUG: AddressToOpen is: " + AddressToOpen
+                console.log("DEBUG: AddressToOpen is: " + AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
@@ -568,7 +568,7 @@ function AbrController() {
                 var xhr = new XMLHttpRequest();
                 AbrServerPort = "8334";
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
-                console.log("DEBUG: AddressToOpen is: " + AddressToOpen
+                console.log("DEBUG: AddressToOpen is: " + AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
@@ -586,7 +586,7 @@ function AbrController() {
                 var xhr = new XMLHttpRequest();
                 AbrServerPort = "8334";
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
-                console.log("DEBUG: AddressToOpen is: " + AddressToOpen
+                console.log("DEBUG: AddressToOpen is: " + AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
@@ -604,7 +604,7 @@ function AbrController() {
                 var xhr = new XMLHttpRequest();
                 AbrServerPort = "8334";
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
-                console.log("DEBUG: AddressToOpen is: " + AddressToOpen
+                console.log("DEBUG: AddressToOpen is: " + AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
                 xhr.onreadystatechange = function() {
                     if ( xhr.readyState == 4 && xhr.status == 200 ) {
@@ -664,7 +664,7 @@ function AbrController() {
                     var xhr = new XMLHttpRequest();
                     AbrServerPort = "8334";
                     var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
-                    console.log("DEBUG: AddressToOpen is: " + AddressToOpen
+                    console.log("DEBUG: AddressToOpen is: " + AddressToOpen)
                     xhr.open("POST", AddressToOpen, false);
                     xhr.onreadystatechange = function() {
                         if ( xhr.readyState == 4 && xhr.status == 200 ) {
