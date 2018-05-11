@@ -15,28 +15,17 @@ def main():
     args = parser.parse_args()
 
     abr_algo = args.algorithm
-    expt_id = '1'
-
     rl_server_dir = path.abspath(path.join(path.dirname(__file__),
                                            os.pardir, 'rl_server'))
 
     if abr_algo == 'RL':
-        cmd = ['python', path.join(rl_server_dir, 'rl_server_no_training.py'),
-               expt_id]
-        kill_port_cmd = 'lsof -ti:8333 | xargs kill -9'
+        cmd = ['python', path.join(rl_server_dir, 'rl_server_no_training.py')]
     elif abr_algo == 'fastMPC':
-        cmd = ['python', path.join(rl_server_dir, 'mpc_server.py'), expt_id]
-        kill_port_cmd = 'lsof -ti:8335 | xargs kill -9'
+        cmd = ['python', path.join(rl_server_dir, 'mpc_server.py')]
     elif abr_algo == 'robustMPC':
-        cmd = ['python', path.join(rl_server_dir, 'robust_mpc_server.py'),
-               expt_id]
-        kill_port_cmd = 'lsof -ti:8336 | xargs kill -9'
+        cmd = ['python', path.join(rl_server_dir, 'robust_mpc_server.py')]
     else:
-        cmd = ['python', path.join(rl_server_dir, 'simple_server.py'), expt_id]
-        kill_port_cmd = 'lsof -ti:8334 | xargs kill -9'
-
-    if kill_port_cmd:
-        subprocess.call(kill_port_cmd, shell=True)
+        cmd = ['python', path.join(rl_server_dir, 'simple_server.py')]
 
     subprocess.call(cmd)
 

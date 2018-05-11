@@ -327,6 +327,7 @@ def run(server_class=HTTPServer, port=8336, log_file_path=LOG_FILE):
 
         server_address = ('0.0.0.0', port)
         httpd = server_class(server_address, handler_class)
+        httpd.allow_reuse_address = True
         print 'Listening on port ' + str(port)
         httpd.serve_forever()
 
