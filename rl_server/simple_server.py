@@ -36,7 +36,6 @@ def make_request_handler(input_dict):
             BaseHTTPRequestHandler.__init__(self, *args, **kwargs)
 
         def do_POST(self):
-            print "Hud: do post"
             content_length = int(self.headers['Content-Length'])
             post_data = json.loads(self.rfile.read(content_length))
             
@@ -86,7 +85,6 @@ def make_request_handler(input_dict):
             self.wfile.write(send_data)
 
         def do_GET(self):
-            print "Hud: Got Req"
             print >> sys.stderr, 'GOT REQ'
             self.send_response(200)
             #self.send_header('Cache-Control', 'Cache-Control: no-cache, no-store, must-revalidate max-age=0')

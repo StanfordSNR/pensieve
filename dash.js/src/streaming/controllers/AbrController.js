@@ -517,7 +517,6 @@ function AbrController() {
         //algorithm
         var runFastMPC = false;
         var runRobustMPC = false;
-        console.log("Hudson: AbrAlgo before reset is: " + abrAlgo)
         if (abrAlgo === 7) {
             runFastMPC = true;
         } else if (abrAlgo === 8) {

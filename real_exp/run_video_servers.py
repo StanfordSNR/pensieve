@@ -15,8 +15,8 @@ def main():
     args = parser.parse_args()
 
     abr_algo = args.algorithm
-    rl_server_dir = path.abspath(path.join(path.dirname(__file__),
-                                           os.pardir, 'rl_server'))
+    pensieve_dir = path.abspath(path.join(path.dirname(__file__), os.pardir))
+    rl_server_dir = path.join(pensieve_dir, 'rl_server')
 
     if abr_algo == 'RL':
         cmd = ['python', path.join(rl_server_dir, 'rl_server_no_training.py')]
@@ -27,7 +27,7 @@ def main():
     else:
         cmd = ['python', path.join(rl_server_dir, 'simple_server.py')]
 
-    subprocess.call(cmd)
+    subprocess.call(cmd, cwd=path.join(pensieve_dir, 'real_exp'))
 
 
 if __name__ == '__main__':
