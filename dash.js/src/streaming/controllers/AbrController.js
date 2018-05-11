@@ -507,6 +507,23 @@ function AbrController() {
         //var lastHTTPRequest = dashMetrics.getHttpRequests(metricsModel.getReadOnlyMetricsFor('video'))[lastRequested];
         var lastHTTPRequest = dashMetrics.getCurrentHttpRequest(metrics);
         var bandwidthEst = predict_throughput(lastRequested, lastQuality, lastHTTPRequest);
+
+        //Next few lines handle the fact that original Pensieve code used abrAlgo = 4 for
+        //Pensieve, robustMPC, and fastMPC by simply running a different server algorithm to
+        //test each while changing nothing on the client side. We want each client to deterministically
+        //use one of these algorithms so we added two new abrAlgo options (7/8) and those options
+        //are treated the same as Pensieve but the runFastMPC and runRobustMPC
+        //booleans determine what server port is accessed, and each serverport is running a different
+        //algorithm
+        var runFastMPC = false;
+        var runRobustMPC = false;
+        console.log("Hudson: AbrAlgo before reset is: " + abrAlgo)
+        if (abrAlgo === 7) {
+            runFastMPC = true;
+        } else if (abrAlgo === 8) {
+            runRobustMPC = true;
+        }
+        
         switch(abrAlgo) {
             case 2:
                 var xhr = new XMLHttpRequest();
@@ -542,10 +559,18 @@ function AbrController() {
                 var data = {'nextChunkSize': next_chunk_size(lastRequested+1), 'Type': 'RB', 'lastquality': lastQuality, 'buffer': buffer, 'bufferAdjusted': bufferLevelAdjusted, 'bandwidthEst': bandwidthEst, 'lastRequest': lastRequested, 'RebufferTime': rebuffer, 'lastChunkFinishTime': lastHTTPRequest._tfinish.getTime(), 'lastChunkStartTime': lastHTTPRequest.tresponse.getTime(), 'lastChunkSize': last_chunk_size(lastHTTPRequest)};
                 xhr.send(JSON.stringify(data));
                 return getBitrateRB(bandwidthEst);
-            case 4:
+            case 4: //Case 4 8 and 9 all run the following code
+            case 7:
+            case 8:
                 var quality = 2;
                 var xhr = new XMLHttpRequest();
-                AbrServerPort = "8333";
+                if(runFastMPC) {
+                    AbrServerPort = "8335"
+                } else if(runRobustMPC) {
+                    AbrServerPort = "8336"
+                } else { //Pensieve
+                    AbrServerPort = "8333";
+                }
                 var AddressToOpen = "http://" + location.hostname + ":" + AbrServerPort;
                 console.log("DEBUG: AddressToOpen is: " + AddressToOpen)
                 xhr.open("POST", AddressToOpen, false);
