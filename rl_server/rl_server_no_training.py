@@ -264,9 +264,9 @@ def run(server_class=HTTPServer, port=8333, log_file_path=LOG_FILE):
         # interface to abr_rl server
         handler_class = make_request_handler(input_dict=input_dict)
 
+        server_class.allow_reuse_address = True
         server_address = ('0.0.0.0', port)
         httpd = server_class(server_address, handler_class)
-        httpd.allow_reuse_address = True
         print 'Listening on port ' + str(port)
         httpd.serve_forever()
 
