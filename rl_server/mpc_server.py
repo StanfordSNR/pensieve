@@ -18,9 +18,10 @@ import itertools
 S_INFO = 5  # bit_rate, buffer_size, rebuffering_time, bandwidth_measurement, chunk_til_video_end
 S_LEN = 8  # take how many frames in the past
 MPC_FUTURE_CHUNK_COUNT = 5
-VIDEO_BIT_RATE = [300,750,1200,1850,2850,4300]  # Kbps
-BITRATE_REWARD = [1, 2, 3, 12, 15, 20]
-BITRATE_REWARD_MAP = {0: 0, 300: 1, 750: 2, 1200: 3, 1850: 12, 2850: 15, 4300: 20}
+#VIDEO_BIT_RATE = [300,750,1200,1850,2850,4300]  # Kbps
+VIDEO_BIT_RATE = [593,1108,1714,3200]  # Kbps
+BITRATE_REWARD = [1, 2, 3, 12]
+BITRATE_REWARD_MAP = {0: 0, 593: 1, 1108: 2, 1714: 3, 3200: 12}
 M_IN_K = 1000.0
 BUFFER_NORM_FACTOR = 10.0
 CHUNK_TIL_VIDEO_END_CAP = 1000.0
