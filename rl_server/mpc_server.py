@@ -23,8 +23,8 @@ BITRATE_REWARD = [1, 2, 3, 12, 15, 20]
 BITRATE_REWARD_MAP = {0: 0, 300: 1, 750: 2, 1200: 3, 1850: 12, 2850: 15, 4300: 20}
 M_IN_K = 1000.0
 BUFFER_NORM_FACTOR = 10.0
-CHUNK_TIL_VIDEO_END_CAP = 48.0
-TOTAL_VIDEO_CHUNKS = 48
+CHUNK_TIL_VIDEO_END_CAP = 1000.0
+TOTAL_VIDEO_CHUNKS = 1000
 DEFAULT_QUALITY = 0  # default video quality without agent
 REBUF_PENALTY = 4.3  # 1 sec rebuffering -> this number of Mbps
 SMOOTH_PENALTY = 1
@@ -48,6 +48,8 @@ size_video5 = [450283, 398865, 350812, 382355, 411561, 318564, 352642, 437162, 3
 size_video6 = [181801, 155580, 139857, 155432, 163442, 126289, 153295, 173849, 150710, 139105, 141840, 156148, 160746, 179801, 140051, 138313, 143509, 150616, 165384, 140881, 157671, 157812, 163927, 137654, 146754, 153938, 181901, 111155, 153605, 149029, 157421, 157488, 143881, 163444, 179328, 159914, 131610, 124011, 144254, 149991, 147968, 161857, 145210, 172312, 167025, 160064, 137507, 118421, 112270]
 
 def get_chunk_size(quality, index):
+    return 900000 #Edit by Hudson, until we figure out how to use per-chunk sizes
+    #TODO: Modify this function to use actual chunk sizes of decoded segments or some other estimate of future chunk sizes
     if ( index < 0 or index > 48 ):
         return 0
     # note that the quality and video labels are inverted (i.e., quality 8 is highest and this pertains to video1)
@@ -236,13 +238,14 @@ def make_request_handler(input_dict):
                 #print "TOOK: " + str(end-start)
 
                 end_of_video = False
-                if ( post_data['lastRequest'] == TOTAL_VIDEO_CHUNKS ):
-                    send_data = "REFRESH"
-                    end_of_video = True
-                    self.input_dict['last_total_rebuf'] = 0
-                    self.input_dict['last_bit_rate'] = DEFAULT_QUALITY
-                    self.input_dict['video_chunk_coount'] = 0
-                    self.log_file.write('\n')  # so that in the log we know where video ends
+                #Hudson: Below code was removed bc for live streaming the videos should not end
+                #if ( post_data['lastRequest'] == TOTAL_VIDEO_CHUNKS ):
+                #    send_data = "REFRESH"
+                #    end_of_video = True
+                #    self.input_dict['last_total_rebuf'] = 0
+                #    self.input_dict['last_bit_rate'] = DEFAULT_QUALITY
+                #    self.input_dict['video_chunk_coount'] = 0
+                #    self.log_file.write('\n')  # so that in the log we know where video ends
 
                 self.send_response(200)
                 self.send_header('Content-Type', 'text/plain')
