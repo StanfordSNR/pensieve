@@ -91,6 +91,8 @@ def make_request_handler(input_dict):
                 # option 4. use the metric in SIGCOMM MPC paper
                 rebuffer_time = float(post_data['RebufferTime'] -self.input_dict['last_total_rebuf'])
 
+                if post_data['lastquality'] >= len(VIDEO_BIT_RATE):
+                    post_data['lastquality'] = len(VIDEO_BIT_RATE) -1
                 # --linear reward--
                 reward = VIDEO_BIT_RATE[post_data['lastquality']] / M_IN_K \
                         - REBUF_PENALTY * rebuffer_time / M_IN_K \
@@ -154,7 +156,7 @@ def make_request_handler(input_dict):
                                     str(reward) + '\n')
                 self.log_file.flush()
 
-                # pick bitrate according to MPC           
+                # pick bitrate according to MPC 
                 # first get harmonic mean of last 5 bandwidths
                 past_bandwidths = state[3,-5:]
                 while past_bandwidths[0] == 0.0:
@@ -211,6 +213,9 @@ def make_request_handler(input_dict):
                         # smoothness_diffs += abs(log_bit_rate - log_last_bit_rate)
 
                         # hd reward
+                        if chunk_quality >= len(BITRATE_REWARD):
+                            chunk_quality = len(BITRATE_REWARD) - 1
+
                         bitrate_sum += BITRATE_REWARD[chunk_quality]
                         smoothness_diffs += abs(BITRATE_REWARD[chunk_quality] - BITRATE_REWARD[last_quality])
 
@@ -218,7 +223,7 @@ def make_request_handler(input_dict):
                     # compute reward for this combination (one reward per 5-chunk combo)
                     # bitrates are in Mbits/s, rebuffer in seconds, and smoothness_diffs in Mbits/s
 
-                    # linear reward 
+                    # linear reward
                     #reward = (bitrate_sum/1000.) - (4.3*curr_rebuffer_time) - (smoothness_diffs/1000.)
 
                     # log reward

@@ -94,6 +94,9 @@ def make_request_handler(input_dict):
                 # option 4. use the metric in SIGCOMM MPC paper
                 rebuffer_time = float(post_data['RebufferTime'] -self.input_dict['last_total_rebuf'])
 
+                if post_data['lastquality'] >= len(VIDEO_BIT_RATE):
+                    post_data['lastquality'] = len(VIDEO_BIT_RATE) -1
+
                 # --linear reward--
                 reward = VIDEO_BIT_RATE[post_data['lastquality']] / M_IN_K \
                         - REBUF_PENALTY * rebuffer_time / M_IN_K \
@@ -101,7 +104,7 @@ def make_request_handler(input_dict):
                                                   self.input_dict['last_bit_rate']) / M_IN_K
 
                 # --log reward--
-                # log_bit_rate = np.log(VIDEO_BIT_RATE[post_data['lastquality']] / float(VIDEO_BIT_RATE[0]))   
+                # log_bit_rate = np.log(VIDEO_BIT_RATE[post_data['lastquality']] / float(VIDEO_BIT_RATE[0]))
                 # log_last_bit_rate = np.log(self.input_dict['last_bit_rate'] / float(VIDEO_BIT_RATE[0]))
 
                 # reward = log_bit_rate \
@@ -218,7 +221,7 @@ def make_request_handler(input_dict):
                         else:
                             curr_buffer -= download_time
                         curr_buffer += 4
-                        
+
                         # linear reward
                         #bitrate_sum += VIDEO_BIT_RATE[chunk_quality]
                         #smoothness_diffs += abs(VIDEO_BIT_RATE[chunk_quality] - VIDEO_BIT_RATE[last_quality])
@@ -230,14 +233,17 @@ def make_request_handler(input_dict):
                         # smoothness_diffs += abs(log_bit_rate - log_last_bit_rate)
 
                         # hd reward
+                        if chunk_quality >= len(BITRATE_REWARD):
+                            chunk_quality = len(BITRATE_REWARD) - 1
                         bitrate_sum += BITRATE_REWARD[chunk_quality]
+
                         smoothness_diffs += abs(BITRATE_REWARD[chunk_quality] - BITRATE_REWARD[last_quality])
 
                         last_quality = chunk_quality
                     # compute reward for this combination (one reward per 5-chunk combo)
                     # bitrates are in Mbits/s, rebuffer in seconds, and smoothness_diffs in Mbits/s
-                    
-                    # linear reward 
+
+                    # linear reward
                     #reward = (bitrate_sum/1000.) - (4.3*curr_rebuffer_time) - (smoothness_diffs/1000.)
 
                     # log reward
