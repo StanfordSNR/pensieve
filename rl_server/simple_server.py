@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import SocketServer
+from SocketServer import ThreadingMixIn
 import base64
 import urllib
 import sys
@@ -38,7 +39,6 @@ def make_request_handler(input_dict):
         def do_POST(self):
             content_length = int(self.headers['Content-Length'])
             post_data = json.loads(self.rfile.read(content_length))
-            
             print post_data
             send_data = ""
 
@@ -57,7 +57,7 @@ def make_request_handler(input_dict):
 
                 video_chunk_fetch_time = post_data['lastChunkFinishTime'] - post_data['lastChunkStartTime']
                 video_chunk_size = post_data['lastChunkSize']
-                
+
                 # log wall_time, bit_rate, buffer_size, rebuffer_time, video_chunk_size, download_time, reward
                 self.log_file.write(str(time.time()) + '\t' +
                                     str(VIDEO_BIT_RATE[post_data['lastquality']]) + '\t' +
@@ -99,6 +99,9 @@ def make_request_handler(input_dict):
     return Request_Handler
 
 
+class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
+    '''This class mmakes a multi-threaded HTTP server '''
+
 def run(server_class=HTTPServer, port=8334, log_file_path=LOG_FILE):
 
     if not os.path.exists(SUMMARY_DIR):
@@ -107,18 +110,18 @@ def run(server_class=HTTPServer, port=8334, log_file_path=LOG_FILE):
     with open(log_file_path, 'wb') as log_file:
 
         last_bit_rate = DEFAULT_QUALITY
-        last_total_rebuf = 0 
+        last_total_rebuf = 0
         input_dict = {'log_file': log_file,
                       'last_bit_rate': last_bit_rate,
                       'last_total_rebuf': last_total_rebuf}
 
         handler_class = make_request_handler(input_dict=input_dict)
 
-        server_class.allow_reuse_address = True
         server_address = ('0.0.0.0', port)
-        httpd = server_class(server_address, handler_class)
+        server = ThreadedHTTPServer(server_address, handler_class)
+        server.allow_reuse_address = True
         print 'Listening on port ' + str(port)
-        httpd.serve_forever()
+        server.serve_forever()
 
 
 def main():
