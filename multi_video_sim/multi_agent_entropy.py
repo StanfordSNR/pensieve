@@ -15,7 +15,7 @@ def kill(proc_pid):
 
 def last_model():
 	model_list = glob.glob('./models/nn_model_ep_*.ckpt*')
-	highest_model = 100
+	highest_model = 0
 	for model_file in model_list:
 		iteration_num = int(model_file.replace("./models/nn_model_ep_", "").split(".ckpt")[0])
 		if iteration_num > highest_model:
@@ -25,18 +25,22 @@ def last_model():
 
 def run():
 
-	os.environ['last_model']='None'
 	os.environ['ENTROPY_WEIGHT']='5'
 	err_log = open('err_log.txt', 'a')
 
-
 	while(True):
+		last_itr_num = last_model()
+		print "last iteration before command: " + str(last_itr_num)
+                if last_itr_num == 0:
+	                os.environ['last_model']='None'
+                else:
+		        os.environ['last_model']='nn_model_ep_' + str(last_itr_num) + '.ckpt'
 		command = 'exec /usr/bin/python ./multi_agent.py'
 		proc = subprocess.Popen(command, shell=True, stderr=err_log)
-		sleep(3600) #Sleep 1 hour at a time
+                sleep(3600)
 		kill(proc.pid)
 		last_itr_num = last_model()
-		print "last iteration: " + str(last_itr_num)
+                print "last iteration after command:: " + str(last_itr_num)
 		os.environ['last_model']='nn_model_ep_' + str(last_itr_num) + '.ckpt'
 		if (last_itr_num < 20000):
 		        pass
