@@ -42,7 +42,6 @@ def get_puffer_info(sock):
     except Exception:
         print "Failed to decode info from Puffer over IPC"
         sys.exit(1)
-        #return 0, 0, 0, 0, 0
     json_data = sock.recv(json_len_num, socket.MSG_WAITALL)
     puffer_info = json.loads(json_data)
     delay = puffer_info['delay'];
@@ -60,7 +59,6 @@ def send_puffer_next_action(sock, bit_rate):
     bit_rate_json = json.dumps(bit_rate_dict)
     json_len = struct.pack("!H", len(bit_rate_json))
     err = sock.sendall(json_len + bit_rate_json)
-    #err = sock.sendall(str(bit_rate))
     return err
 
 
@@ -80,7 +78,7 @@ def main():
     assert len(VIDEO_BIT_RATE) == A_DIM
 
     # Originally defined in env.py
-    mask = [1,1,1,1,1,1,1,1,1,1] # TODO: Make me a variable dependent on channel
+    mask = [1,1,1,1,1,1,1,1,1,1]
     with tf.Session() as sess:
 
         actor = a3c.ActorNetwork(sess,
