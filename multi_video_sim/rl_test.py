@@ -95,7 +95,6 @@ def main():
         # restore neural net parameters
         if NN_MODEL is not None:  # NN_MODEL is the path to file
             saver.restore(sess, NN_MODEL)
-            print("Testing model restored.")
 
         last_bit_rate = DEFAULT_QUALITY
         bit_rate = DEFAULT_QUALITY
