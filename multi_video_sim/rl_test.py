@@ -5,6 +5,8 @@ import json
 import sys
 import socket
 os.environ['CUDA_VISIBLE_DEVICES']=''
+os.environ['OMP_NUM_THREADS'] = '1' # export OMP_NUM_THREADS=1
+os.environ['OPENBLAS_NUM_THREADS'] = '1' # export OPENBLAS_NUM_THREADS=1
 import numpy as np
 import tensorflow as tf
 import a3c
@@ -79,7 +81,10 @@ def main():
 
     # Originally defined in env.py
     mask = [1,1,1,1,1,1,1,1,1,1]
-    with tf.Session() as sess:
+    session_conf = tf.ConfigProto(
+        intra_op_parallelism_threads=1,
+        inter_op_parallelism_threads=1)
+    with tf.Session(config=session_conf) as sess:
 
         actor = a3c.ActorNetwork(sess,
                                  state_dim=[S_INFO, S_LEN], action_dim=A_DIM,
